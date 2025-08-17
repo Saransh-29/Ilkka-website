@@ -14,7 +14,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/#about', label: 'About' },
-    { href: '/#products', label: 'Products' },
+    { href: '/products', label: 'Products' },
     { href: '/#contact', label: 'Contact' },
   ];
 
@@ -45,12 +45,6 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-1/2 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
               </Link>
             ))}
-            <Link
-              href="/#contact"
-              className="ml-4 px-6 py-2 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300 font-medium shadow-md hover:shadow-lg hover:scale-105"
-            >
-              Get Started
-            </Link>
           </div>
 
           {/* Mobile menu button */}
@@ -87,13 +81,6 @@ const Navbar = () => {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/#contact"
-              className="block mx-3 mt-4 px-4 py-3 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-all duration-300 font-medium text-center"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Get Started
-            </Link>
           </div>
         </div>
       </div>
