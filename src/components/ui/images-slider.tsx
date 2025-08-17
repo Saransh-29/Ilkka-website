@@ -11,7 +11,7 @@ export const ImagesSlider = ({
   overlayClassName,
   className,
   autoplay = true,
-  direction = "up",
+  direction = "left",
 }: {
   images: string[];
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export const ImagesSlider = ({
   overlayClassName?: string;
   className?: string;
   autoplay?: boolean;
-  direction?: "up" | "down";
+  direction?: "left" | "right";
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [, setLoading] = useState(false); // Consider if you need this state if you're preloading
@@ -91,11 +91,11 @@ export const ImagesSlider = ({
     initial: {
       scale: 0,
       opacity: 0,
-      rotateX: 45,
+      rotateY: 45, // Changed from rotateX to rotateY for horizontal perspective
     },
     visible: {
       scale: 1,
-      rotateX: 0,
+      rotateY: 0, // Changed from rotateX to rotateY
       opacity: 1,
       transition: {
         duration: 0.5,
@@ -103,16 +103,16 @@ export const ImagesSlider = ({
         ease: [0.645, 0.045, 0.355, 1.0] as [number, number, number, number],
       },
     },
-    upExit: {
+    leftExit: {
       opacity: 1,
-      y: "-150%",
+      x: "-150%", // Changed from y to x for horizontal movement
       transition: {
         duration: 1,
       },
     },
-    downExit: {
+    rightExit: {
       opacity: 1,
-      y: "150%",
+      x: "150%", // Changed from y to x for horizontal movement
       transition: {
         duration: 1,
       },
@@ -155,7 +155,7 @@ export const ImagesSlider = ({
             src={loadedImages[currentIndex]}
             initial="initial"
             animate="visible"
-            exit={direction === "up" ? "upExit" : "downExit"}
+            exit={direction === "left" ? "leftExit" : "rightExit"}
             variants={slideVariants}
             className="image h-full w-full absolute inset-0 object-cover object-center"
           />
