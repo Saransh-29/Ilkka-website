@@ -15,7 +15,7 @@
 //       >
 //         ↑ Top
 //       </button>
-      
+
 //       <button
 //         onClick={() => scrollToSection('about')}
 //         className="rounded bg-primary px-3 py-1 text-xs text-white hover:bg-primary/80"
@@ -23,7 +23,7 @@
 //       >
 //         About
 //       </button>
-      
+
 //       <button
 //         onClick={() => scrollToSection('products')}
 //         className="rounded bg-primary px-3 py-1 text-xs text-white hover:bg-primary/80"
@@ -31,7 +31,7 @@
 //       >
 //         Products
 //       </button>
-      
+
 //       <button
 //         onClick={() => scrollToSection('contact')}
 //         className="rounded bg-primary px-3 py-1 text-xs text-white hover:bg-primary/80"
