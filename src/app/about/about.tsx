@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
@@ -23,7 +23,6 @@ const renderTextContent = (paragraph: TextContent) => {
 };
 
 const About = () => {
-
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -108,7 +107,7 @@ const About = () => {
                 className={aboutContent.image.className}
               />
             </motion.div>
-            <motion.div 
+            <motion.div
               className="text-left md:w-1/2"
               initial="hidden"
               whileInView="visible"
@@ -120,7 +119,7 @@ const About = () => {
                 <motion.p
                   key={index}
                   variants={paragraphVariants}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
                   className={`text-muted-foreground text-lg leading-relaxed ${index === 0 ? 'mb-6' : ''}`}
                 >
                   {renderTextContent(paragraph)}
