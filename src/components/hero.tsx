@@ -34,27 +34,6 @@ export function Hero() {
     }
   };
 
-  const buttonVariants = {
-    hidden: { scale: 0, opacity: 0 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      transition: {
-        delay: 1.2,
-        duration: 0.6
-      }
-    },
-    hover: {
-      scale: 1.05,
-      transition: {
-        duration: 0.2
-      }
-    },
-    tap: {
-      scale: 0.95
-    }
-  };
-
   return (
     <section id="hero" aria-label="Hero section - Welcome to Ilkka Healthcare">
       <ImagesSlider className="h-[100vh]" images={images}>
@@ -91,22 +70,21 @@ export function Hero() {
           </motion.p>
 
           <motion.nav
-            variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
             className="flex flex-col sm:flex-row gap-4 max-w-[60vw]"
             aria-label="Main navigation buttons"
           >
-            <motion.button 
-              onClick={() => router.push("/#about")} 
-              className="px-4 py-2  bg-primary text-primary-foreground font-semibold rounded-full shadow-2xl hover:shadow-primary/25 transition-all duration-300 md:3xs lg:text-lg"
+            <motion.button
+              onClick={() => router.push("/#about")}
+              className="px-8 py-4 transition-transform duration-300 hover:scale-110 ease-in-out bg-primary text-primary-foreground font-semibold rounded-full shadow-2xl hover:shadow-primary/25 lg:text-lg"
               aria-label="Learn more about Ilkka Healthcare"
             >
-              Learn More About Us
+              Learn More
             </motion.button>
-            <motion.button 
-              onClick={() => router.push("/#products")} 
-              className="px-8 py-4 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300 text-lg"
+            <motion.button
+              onClick={() => router.push("/#products")}
+              className="px-8 py-4 transition-transform duration-300 hover:scale-110 ease-in-out backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-full hover:bg-white/10 lg:text-lg"
               aria-label="View our medical products and equipment"
             >
               View Our Products
