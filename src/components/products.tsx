@@ -30,20 +30,24 @@ const Products = () => {
 
   return (
     <>
-      <section id="products" className="py-20 bg-background">
+      <section id="products" className="bg-background py-20">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-12">
+          <h2 className="text-foreground mb-12 text-center text-3xl font-bold md:text-4xl">
             Our Products
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {productsData.map((product: Product, index: number) => (
-              <div key={index} onClick={() => handleCardClick(product)} className="cursor-pointer">
-                <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 h-full">
+              <div
+                key={index}
+                onClick={() => handleCardClick(product)}
+                className="cursor-pointer"
+              >
+                <Card className="h-full overflow-hidden shadow-lg transition-shadow duration-300 hover:shadow-xl">
                   <CardHeader className="p-0">
                     <div className="relative h-48 w-full">
-                      <Image 
-                        src={product.image} 
-                        alt={product.name} 
+                      <Image
+                        src={product.image}
+                        alt={product.name}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
@@ -52,8 +56,12 @@ const Products = () => {
                     </div>
                   </CardHeader>
                   <CardContent className="p-6">
-                    <CardTitle className="text-xl font-bold text-primary mb-2">{product.name}</CardTitle>
-                    <p className="text-muted-foreground">{product.description}</p>
+                    <CardTitle className="text-primary mb-2 text-xl font-bold">
+                      {product.name}
+                    </CardTitle>
+                    <p className="text-muted-foreground">
+                      {product.description}
+                    </p>
                   </CardContent>
                 </Card>
               </div>

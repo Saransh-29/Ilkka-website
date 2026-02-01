@@ -15,7 +15,9 @@ export interface EmailTemplate {
 }
 
 // Contact form notification email template (to admin)
-export const createContactNotificationTemplate = (data: ContactFormData): EmailTemplate => {
+export const createContactNotificationTemplate = (
+  data: ContactFormData
+): EmailTemplate => {
   const html = `
     <!DOCTYPE html>
     <html>
@@ -53,19 +55,27 @@ export const createContactNotificationTemplate = (data: ContactFormData): EmailT
             <div class="field-value"><a href="mailto:${data.email}" style="color: #2563eb; text-decoration: none;">${data.email}</a></div>
           </div>
           
-          ${data.phone ? `
+          ${
+            data.phone
+              ? `
           <div class="field">
             <div class="field-label">📞 Phone Number</div>
             <div class="field-value"><a href="tel:${data.phone}" style="color: #2563eb; text-decoration: none;">${data.phone}</a></div>
           </div>
-          ` : ''}
+          `
+              : ''
+          }
           
-          ${data.company ? `
+          ${
+            data.company
+              ? `
           <div class="field">
             <div class="field-label">🏢 Company</div>
             <div class="field-value">${data.company}</div>
           </div>
-          ` : ''}
+          `
+              : ''
+          }
           
           <div class="field">
             <div class="field-label">📝 Subject</div>
@@ -79,14 +89,14 @@ export const createContactNotificationTemplate = (data: ContactFormData): EmailT
           
           <div style="margin-top: 30px; padding: 20px; background: #dbeafe; border-radius: 8px; text-align: center;">
             <p style="margin: 0; color: #1e40af; font-weight: 500;">
-              📅 Submitted on ${new Date().toLocaleString('en-US', { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
+              📅 Submitted on ${new Date().toLocaleString('en-US', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
                 day: 'numeric',
                 hour: '2-digit',
                 minute: '2-digit',
-                timeZoneName: 'short'
+                timeZoneName: 'short',
               })}
             </p>
           </div>
@@ -117,12 +127,14 @@ Submitted on: ${new Date().toLocaleString()}
   return {
     subject: `🩺 New Contact: ${data.subject} - from ${data.name}`,
     html,
-    text
+    text,
   };
 };
 
 // Auto-reply email template (to user)
-export const createContactAutoReplyTemplate = (data: ContactFormData): EmailTemplate => {
+export const createContactAutoReplyTemplate = (
+  data: ContactFormData
+): EmailTemplate => {
   const html = `
     <!DOCTYPE html>
     <html>
@@ -224,6 +236,6 @@ This is an automated response. Please do not reply to this email.
   return {
     subject: `✅ Thank you for contacting ILKKA Healthcare - We'll be in touch soon!`,
     html,
-    text
+    text,
   };
 };

@@ -1,7 +1,7 @@
-"use client";
-import { cn } from "@/lib/utils";
-import { motion, AnimatePresence, Variants } from "framer-motion"; // Import Variants
-import React, { useEffect, useState, useCallback } from "react";
+'use client';
+import { cn } from '@/lib/utils';
+import { motion, AnimatePresence, Variants } from 'framer-motion'; // Import Variants
+import React, { useEffect, useState, useCallback } from 'react';
 
 export const ImagesSlider = ({
   images,
@@ -11,7 +11,7 @@ export const ImagesSlider = ({
   overlayClassName,
   className,
   autoplay = true,
-  direction = "left",
+  direction = 'left',
 }: {
   images: string[];
   children: React.ReactNode;
@@ -20,7 +20,7 @@ export const ImagesSlider = ({
   overlayClassName?: string;
   className?: string;
   autoplay?: boolean;
-  direction?: "left" | "right";
+  direction?: 'left' | 'right';
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [, setLoading] = useState(false); // Consider if you need this state if you're preloading
@@ -42,7 +42,7 @@ export const ImagesSlider = ({
         setLoadedImages(loaded as string[]);
         setLoading(false);
       })
-      .catch((error) => console.error("Failed to load images", error));
+      .catch((error) => console.error('Failed to load images', error));
   }, [images]);
 
   const handleNext = useCallback(() => {
@@ -63,14 +63,14 @@ export const ImagesSlider = ({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "ArrowRight") {
+      if (event.key === 'ArrowRight') {
         handleNext();
-      } else if (event.key === "ArrowLeft") {
+      } else if (event.key === 'ArrowLeft') {
         handlePrevious();
       }
     };
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener('keydown', handleKeyDown);
 
     let interval: NodeJS.Timeout | number | undefined; // More specific type for interval ID
     if (autoplay) {
@@ -80,20 +80,22 @@ export const ImagesSlider = ({
     }
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      if (interval) { // Only clear if interval was actually set
+      window.removeEventListener('keydown', handleKeyDown);
+      if (interval) {
+        // Only clear if interval was actually set
         clearInterval(interval as number); // Cast to number for browser clearInterval
       }
     };
   }, [autoplay, handleNext, handlePrevious]); // Add handleNext and handlePrevious to dependencies
 
-  const slideVariants: Variants = { // Explicitly type slideVariants as Variants
+  const slideVariants: Variants = {
+    // Explicitly type slideVariants as Variants
     initial: {
-      x: direction === "left" ? "100%" : "-100%", // Slide in from right or left
+      x: direction === 'left' ? '100%' : '-100%', // Slide in from right or left
       opacity: 0,
     },
     visible: {
-      x: "0%",
+      x: '0%',
       opacity: 1,
       transition: {
         duration: 0.8,
@@ -102,7 +104,7 @@ export const ImagesSlider = ({
       },
     },
     leftExit: {
-      x: "-100%", // Slide out to the left
+      x: '-100%', // Slide out to the left
       opacity: 0,
       transition: {
         duration: 0.8,
@@ -110,7 +112,7 @@ export const ImagesSlider = ({
       },
     },
     rightExit: {
-      x: "100%", // Slide out to the right
+      x: '100%', // Slide out to the right
       opacity: 0,
       transition: {
         duration: 0.8,
@@ -124,11 +126,11 @@ export const ImagesSlider = ({
   return (
     <div
       className={cn(
-        "overflow-hidden h-full w-full relative flex items-center justify-center",
+        'relative flex h-full w-full items-center justify-center overflow-hidden',
         className
       )}
       style={{
-        perspective: "1000px",
+        perspective: '1000px',
       }}
     >
       {/* Render children only if images are loaded */}
@@ -137,13 +139,13 @@ export const ImagesSlider = ({
       {/* Render default overlay if showOverlay is true and images are loaded */}
       {areImagesLoaded && showOverlay && (
         <div
-          className={cn("absolute inset-0 bg-black/60 z-40", overlayClassName)}
+          className={cn('absolute inset-0 z-40 bg-black/60', overlayClassName)}
         />
       )}
 
       {/* Render custom overlay if provided and images are loaded */}
       {areImagesLoaded && customOverlay && (
-        <div className={cn("absolute inset-0 z-40", overlayClassName)}>
+        <div className={cn('absolute inset-0 z-40', overlayClassName)}>
           {customOverlay}
         </div>
       )}
@@ -155,9 +157,9 @@ export const ImagesSlider = ({
             src={loadedImages[currentIndex]}
             initial="initial"
             animate="visible"
-            exit={direction === "left" ? "leftExit" : "rightExit"}
+            exit={direction === 'left' ? 'leftExit' : 'rightExit'}
             variants={slideVariants}
-            className="image h-full w-full absolute inset-0 object-cover object-center"
+            className="image absolute inset-0 h-full w-full object-cover object-center"
           />
         </AnimatePresence>
       )}

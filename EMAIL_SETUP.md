@@ -1,9 +1,11 @@
 # 📧 ILKKA Healthcare Email System Setup
 
 ## Overview
+
 This email system uses **Nodemailer** with **Gmail SMTP** and **Google App Passwords** to handle contact form submissions. The system sends both admin notifications and user auto-replies.
 
 ## 🚀 Features
+
 - ✅ Contact form email notifications to admin
 - ✅ Auto-reply emails to users
 - ✅ Professional HTML email templates
@@ -16,6 +18,7 @@ This email system uses **Nodemailer** with **Gmail SMTP** and **Google App Passw
 ## 📋 Prerequisites
 
 ### 1. Gmail Account Setup
+
 You need a Gmail account to send emails. Follow these steps:
 
 1. **Enable 2-Factor Authentication** on your Gmail account
@@ -27,6 +30,7 @@ You need a Gmail account to send emails. Follow these steps:
    - **Copy the 16-character password** (you'll need this)
 
 ### 2. Environment Variables
+
 Create/update your `.env.local` file with:
 
 ```env
@@ -44,13 +48,13 @@ CONTACT_EMAIL_TO=contact@ilkka-healthcare.com
 
 ### Required Environment Variables
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `EMAIL_USER` | Your Gmail address | `admin@gmail.com` |
-| `EMAIL_APP_PASSWORD` | Gmail app password (16 chars) | `abcd efgh ijkl mnop` |
-| `EMAIL_FROM_NAME` | Sender display name | `ILKKA Healthcare` |
-| `EMAIL_FROM_ADDRESS` | From email address | `noreply@ilkka-healthcare.com` |
-| `CONTACT_EMAIL_TO` | Where contact forms are sent | `contact@ilkka-healthcare.com` |
+| Variable             | Description                   | Example                        |
+| -------------------- | ----------------------------- | ------------------------------ |
+| `EMAIL_USER`         | Your Gmail address            | `admin@gmail.com`              |
+| `EMAIL_APP_PASSWORD` | Gmail app password (16 chars) | `abcd efgh ijkl mnop`          |
+| `EMAIL_FROM_NAME`    | Sender display name           | `ILKKA Healthcare`             |
+| `EMAIL_FROM_ADDRESS` | From email address            | `noreply@ilkka-healthcare.com` |
+| `CONTACT_EMAIL_TO`   | Where contact forms are sent  | `contact@ilkka-healthcare.com` |
 
 ### Google App Password Setup (Detailed)
 
@@ -66,6 +70,7 @@ CONTACT_EMAIL_TO=contact@ilkka-healthcare.com
 ## 🧪 Testing the Email System
 
 ### 1. Test Email Configuration (Development Only)
+
 ```bash
 # Check if email config is valid
 curl http://localhost:3000/api/test-email
@@ -77,7 +82,9 @@ curl -X POST http://localhost:3000/api/test-email \
 ```
 
 ### 2. Test Contact Form
+
 Navigate to your contact form and submit a test message. You should receive:
+
 - Admin notification email (to `CONTACT_EMAIL_TO`)
 - Auto-reply email (to the user's email)
 
@@ -102,11 +109,13 @@ src/
 ## 🔒 Security Features
 
 ### Rate Limiting
+
 - **3 requests per 15 minutes** per IP/email combination
 - Prevents spam and abuse
 - Returns 429 status code when exceeded
 
 ### Input Validation
+
 - **Required fields**: name, email, subject, message
 - **Email format validation**
 - **Phone number format validation**
@@ -114,6 +123,7 @@ src/
 - **XSS protection** through input sanitization
 
 ### Error Handling
+
 - **Graceful degradation**: If one email fails, the other still sends
 - **Detailed logging** for debugging
 - **User-friendly error messages**
@@ -122,11 +132,13 @@ src/
 ## 📧 Email Templates
 
 ### Admin Notification Email
+
 - **Subject**: `🩺 New Contact: [Subject] - from [Name]`
 - **Content**: Professional formatted contact details
 - **Features**: Clickable email/phone links, timestamp, all form data
 
 ### User Auto-Reply Email
+
 - **Subject**: `✅ Thank you for contacting ILKKA Healthcare - We'll be in touch soon!`
 - **Content**: Professional thank you message with next steps
 - **Features**: Contact information, expected response time, helpful tips
@@ -134,6 +146,7 @@ src/
 ## 🚀 Deployment
 
 ### Environment Variables for Production
+
 Make sure to set these in your production environment:
 
 ```env
@@ -146,6 +159,7 @@ NODE_ENV=production
 ```
 
 ### Security Considerations
+
 1. **Never commit** `.env.local` to version control
 2. **Use different Gmail accounts** for development and production
 3. **Regularly rotate** app passwords
@@ -157,18 +171,21 @@ NODE_ENV=production
 ### Common Issues
 
 #### 1. "Invalid login" Error
+
 - ✅ Check `EMAIL_USER` is correct
 - ✅ Verify 2FA is enabled on Gmail
 - ✅ Regenerate app password
 - ✅ Ensure no spaces in app password
 
 #### 2. Emails Not Sending
+
 - ✅ Check internet connection
 - ✅ Verify Gmail SMTP isn't blocked
 - ✅ Check spam folder
 - ✅ Verify environment variables are loaded
 
 #### 3. Rate Limiting Issues
+
 - ✅ Wait 15 minutes between tests
 - ✅ Use different email addresses for testing
 - ✅ Check server logs for rate limit details
@@ -198,6 +215,7 @@ curl http://localhost:3000/api/test-email
 ## 📞 Support
 
 If you encounter issues:
+
 1. Check the troubleshooting section above
 2. Verify your Gmail app password setup
 3. Test with the development email endpoint

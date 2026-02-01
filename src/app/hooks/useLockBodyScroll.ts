@@ -14,7 +14,8 @@ export function useLockBodyScroll(lock: boolean) {
       const originalPaddingRight = document.body.style.paddingRight;
 
       // Get the scrollbar width to prevent content from shifting
-      const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+      const scrollbarWidth =
+        window.innerWidth - document.documentElement.clientWidth;
 
       // Apply the new styles
       document.body.style.overflow = 'hidden';

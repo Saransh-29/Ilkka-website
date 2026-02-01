@@ -15,13 +15,16 @@ export const getEmailConfig = (): EmailConfig => {
     user: process.env.EMAIL_USER || '',
     appPassword: process.env.EMAIL_APP_PASSWORD || '',
     fromName: process.env.EMAIL_FROM_NAME || 'ILKKA Healthcare',
-    fromAddress: process.env.EMAIL_FROM_ADDRESS || 'noreply@ilkka-healthcare.com',
+    fromAddress:
+      process.env.EMAIL_FROM_ADDRESS || 'noreply@ilkka-healthcare.com',
     contactEmail: process.env.CONTACT_EMAIL_TO || '',
   };
 
   // Validate required fields
   if (!config.user || !config.appPassword) {
-    throw new Error('Email configuration is incomplete. Please set EMAIL_USER and EMAIL_APP_PASSWORD environment variables.');
+    throw new Error(
+      'Email configuration is incomplete. Please set EMAIL_USER and EMAIL_APP_PASSWORD environment variables.'
+    );
   }
 
   return config;
