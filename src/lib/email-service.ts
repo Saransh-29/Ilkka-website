@@ -1,5 +1,9 @@
 import { createEmailTransporter, getEmailConfig } from './email-config';
-import { ContactFormData, createContactNotificationTemplate, createContactAutoReplyTemplate } from './email-templates';
+import {
+  ContactFormData,
+  createContactNotificationTemplate,
+  createContactAutoReplyTemplate,
+} from './email-templates';
 
 export interface EmailSendResult {
   success: boolean;
@@ -28,7 +32,7 @@ export const sendEmail = async (
     };
 
     const info = await transporter.sendMail(mailOptions);
-    
+
     console.log('✅ Email sent successfully:', info.messageId);
     return {
       success: true,
@@ -44,10 +48,12 @@ export const sendEmail = async (
 };
 
 // Send contact form notification to admin
-export const sendContactNotification = async (data: ContactFormData): Promise<EmailSendResult> => {
+export const sendContactNotification = async (
+  data: ContactFormData
+): Promise<EmailSendResult> => {
   const config = getEmailConfig();
   const template = createContactNotificationTemplate(data);
-  
+
   if (!config.contactEmail) {
     return {
       success: false,
@@ -64,30 +70,29 @@ export const sendContactNotification = async (data: ContactFormData): Promise<Em
 };
 
 // Send auto-reply to user
-export const sendContactAutoReply = async (data: ContactFormData): Promise<EmailSendResult> => {
+export const sendContactAutoReply = async (
+  data: ContactFormData
+): Promise<EmailSendResult> => {
   const template = createContactAutoReplyTemplate(data);
-  
-  return sendEmail(
-    data.email,
-    template.subject,
-    template.html,
-    template.text
-  );
+
+  return sendEmail(data.email, template.subject, template.html, template.text);
 };
 
 // Send both notification and auto-reply
-export const handleContactFormSubmission = async (data: ContactFormData): Promise<{
+export const handleContactFormSubmission = async (
+  data: ContactFormData
+): Promise<{
   notificationResult: EmailSendResult;
   autoReplyResult: EmailSendResult;
 }> => {
   console.log('📧 Processing contact form submission for:', data.email);
-  
+
   // Send notification to admin
   const notificationResult = await sendContactNotification(data);
-  
+
   // Send auto-reply to user
   const autoReplyResult = await sendContactAutoReply(data);
-  
+
   return {
     notificationResult,
     autoReplyResult,

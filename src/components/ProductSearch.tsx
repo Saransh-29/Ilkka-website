@@ -24,19 +24,26 @@ const ProductSearch = () => {
 
   // Get unique categories
   const categories = useMemo(() => {
-    const cats = ['All', ...new Set(productsData.map(product => product.category))];
+    const cats = [
+      'All',
+      ...new Set(productsData.map((product) => product.category)),
+    ];
     return cats;
   }, []);
 
   // Filter products based on search and category
   const filteredProducts = useMemo(() => {
-    return productsData.filter(product => {
-      const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                           product.features.some(feature => feature.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-      const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-      
+    return productsData.filter((product) => {
+      const matchesSearch =
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.features.some((feature) =>
+          feature.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+      const matchesCategory =
+        selectedCategory === 'All' || product.category === selectedCategory;
+
       return matchesSearch && matchesCategory;
     });
   }, [searchTerm, selectedCategory]);
@@ -50,36 +57,42 @@ const ProductSearch = () => {
   };
 
   return (
-    <section className="py-20 bg-background">
+    <section className="bg-background py-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+        <div className="mb-12 text-center">
+          <h2 className="text-foreground mb-4 text-3xl font-bold md:text-4xl">
             Find Your Healthcare Products
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Search through our comprehensive range of medical supplies and equipment
+          <p className="text-muted-foreground mx-auto max-w-2xl text-lg">
+            Search through our comprehensive range of medical supplies and
+            equipment
           </p>
         </div>
 
         {/* Search and Filter Section */}
-        <div className="max-w-4xl mx-auto mb-12">
-          <div className="flex flex-col md:flex-row gap-4 mb-6">
+        <div className="mx-auto mb-12 max-w-4xl">
+          <div className="mb-6 flex flex-col gap-4 md:flex-row">
             {/* Search Input */}
-            <div className="flex-1 relative">
+            <div className="relative flex-1">
               <svg
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground"
+                className="text-muted-foreground absolute top-1/2 left-3 h-5 w-5 -translate-y-1/2 transform"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
               <input
                 type="text"
                 placeholder="Search products, features, or descriptions..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="bg-card border-border focus:ring-primary w-full rounded-lg border py-3 pr-4 pl-10 focus:border-transparent focus:ring-2 focus:outline-none"
               />
             </div>
 
@@ -88,9 +101,9 @@ const ProductSearch = () => {
               <select
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                className="bg-card border-border focus:ring-primary w-full rounded-lg border px-4 py-3 focus:border-transparent focus:ring-2 focus:outline-none"
               >
-                {categories.map(category => (
+                {categories.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
@@ -100,15 +113,14 @@ const ProductSearch = () => {
           </div>
 
           {/* Results Count */}
-          <div className="text-center text-muted-foreground mb-6">
+          <div className="text-muted-foreground mb-6 text-center">
             {filteredProducts.length === 0 ? (
               <p>No products found matching your criteria</p>
             ) : (
               <p>
-                Showing {filteredProducts.length} of {productsData.length} products
-                {searchTerm && (
-                  <span> for &ldquo;{searchTerm}&rdquo;</span>
-                )}
+                Showing {filteredProducts.length} of {productsData.length}{' '}
+                products
+                {searchTerm && <span> for &ldquo;{searchTerm}&rdquo;</span>}
                 {selectedCategory !== 'All' && (
                   <span> in {selectedCategory}</span>
                 )}
@@ -119,30 +131,40 @@ const ProductSearch = () => {
 
         {/* Products Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {filteredProducts.map((product: Product, index: number) => (
-              <div key={index} onClick={() => handleCardClick(product)} className="cursor-pointer">
-                <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 h-full">
+              <div
+                key={index}
+                onClick={() => handleCardClick(product)}
+                className="cursor-pointer"
+              >
+                <Card className="h-full overflow-hidden shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
                   <CardHeader className="p-0">
                     <div className="relative h-48 w-full">
-                      <Image 
-                        src={product.image} 
-                        alt={product.name} 
-                        fill 
+                      <Image
+                        src={product.image}
+                        alt={product.name}
+                        fill
                         className="object-cover"
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                         priority={index < 4} // Prioritize first 4 images
                       />
-                      <div className="absolute top-2 right-2 bg-primary text-primary-foreground px-2 py-1 rounded text-xs font-medium">
+                      <div className="bg-primary text-primary-foreground absolute top-2 right-2 rounded px-2 py-1 text-xs font-medium">
                         {product.category}
                       </div>
                     </div>
                   </CardHeader>
                   <CardContent className="p-4">
-                    <CardTitle className="text-lg font-bold text-primary mb-2 line-clamp-2">{product.name}</CardTitle>
-                    <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{product.description}</p>
-                    <div className="flex justify-between items-center">
-                      <span className="text-lg font-semibold text-foreground">{product.price}</span>
+                    <CardTitle className="text-primary mb-2 line-clamp-2 text-lg font-bold">
+                      {product.name}
+                    </CardTitle>
+                    <p className="text-muted-foreground mb-3 line-clamp-2 text-sm">
+                      {product.description}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-foreground text-lg font-semibold">
+                        {product.price}
+                      </span>
                       <button className="text-primary hover:text-primary/80 text-sm font-medium">
                         View Details →
                       </button>
@@ -153,11 +175,23 @@ const ProductSearch = () => {
             ))}
           </div>
         ) : (
-          <div className="text-center py-12">
-            <svg className="w-24 h-24 text-muted-foreground mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.347 0-4.518.402-6.294 1.139C4.295 16.5 3 17.45 3 18.5V19h18v-.5c0-1.05-1.295-2-2.706-2.361A7.962 7.962 0 0112 15c-2.347 0-4.518.402-6.294 1.139z" />
+          <div className="py-12 text-center">
+            <svg
+              className="text-muted-foreground mx-auto mb-4 h-24 w-24"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M9.172 16.172a4 4 0 015.656 0M9 12h6m-6-4h6m2 5.291A7.962 7.962 0 0112 15c-2.347 0-4.518.402-6.294 1.139C4.295 16.5 3 17.45 3 18.5V19h18v-.5c0-1.05-1.295-2-2.706-2.361A7.962 7.962 0 0112 15c-2.347 0-4.518.402-6.294 1.139z"
+              />
             </svg>
-            <h3 className="text-xl font-semibold text-foreground mb-2">No products found</h3>
+            <h3 className="text-foreground mb-2 text-xl font-semibold">
+              No products found
+            </h3>
             <p className="text-muted-foreground mb-4">
               Try adjusting your search terms or category filter
             </p>
@@ -166,7 +200,7 @@ const ProductSearch = () => {
                 setSearchTerm('');
                 setSelectedCategory('All');
               }}
-              className="px-6 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-6 py-2 transition-colors"
             >
               Clear Filters
             </button>

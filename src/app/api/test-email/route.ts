@@ -14,13 +14,14 @@ export async function GET() {
 
     // Verify email configuration
     const isConfigValid = await verifyEmailConfig();
-    
+
     if (!isConfigValid) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: 'Email configuration verification failed',
-          message: 'Please check your EMAIL_USER and EMAIL_APP_PASSWORD environment variables'
+          message:
+            'Please check your EMAIL_USER and EMAIL_APP_PASSWORD environment variables',
         },
         { status: 500 }
       );
@@ -32,24 +33,25 @@ export async function GET() {
       user: config.user.replace(/(.{2}).*(@.*)/, '$1***$2'), // Mask email
       fromName: config.fromName,
       fromAddress: config.fromAddress,
-      contactEmail: config.contactEmail ? config.contactEmail.replace(/(.{2}).*(@.*)/, '$1***$2') : 'Not set',
+      contactEmail: config.contactEmail
+        ? config.contactEmail.replace(/(.{2}).*(@.*)/, '$1***$2')
+        : 'Not set',
     };
 
     return NextResponse.json({
       success: true,
       message: 'Email configuration is valid',
       config: configSummary,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-
   } catch (error) {
     console.error('❌ Email test error:', error);
-    
+
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Email test failed',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );
@@ -111,27 +113,26 @@ This is a test email from the ILKKA Healthcare contact form system.
       return NextResponse.json({
         success: true,
         message: `Test email sent successfully to ${testEmail}`,
-        messageId: result.messageId
+        messageId: result.messageId,
       });
     } else {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           error: 'Failed to send test email',
-          details: result.error
+          details: result.error,
         },
         { status: 500 }
       );
     }
-
   } catch (error) {
     console.error('❌ Email test send error:', error);
-    
+
     return NextResponse.json(
-      { 
-        success: false, 
+      {
+        success: false,
         error: 'Test email sending failed',
-        message: error instanceof Error ? error.message : 'Unknown error'
+        message: error instanceof Error ? error.message : 'Unknown error',
       },
       { status: 500 }
     );

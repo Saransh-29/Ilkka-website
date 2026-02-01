@@ -1,8 +1,8 @@
-import { MetadataRoute } from 'next'
- 
+import { MetadataRoute } from 'next';
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://ilkka-healthcare.com'
-  
+  const baseUrl = 'https://ilkka-healthcare.com';
+
   // Static pages
   const staticPages = [
     {
@@ -41,10 +41,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly' as const,
       priority: 0.6,
     },
-  ]
-  
+  ];
+
   // You can add dynamic pages here if you have them
   // For example, individual product pages or blog posts
-  
-  return staticPages
+
+  return staticPages;
 }

@@ -1,41 +1,43 @@
-import Navbar from "@/components/navbar";
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import Navbar from '@/components/navbar';
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono } from 'next/font/google';
+import './globals.css';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 export const metadata: Metadata = {
   title: {
-    default: "Ilkka Healthcare - Medical Equipment & Supplies | Ethiopia & Somaliland",
-    template: "%s | Ilkka Healthcare"
+    default:
+      'Ilkka Healthcare - Medical Equipment & Supplies | Ethiopia & Somaliland',
+    template: '%s | Ilkka Healthcare',
   },
-  description: "Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products, blood pressure monitors, medical supplies, and professional healthcare solutions.",
+  description:
+    'Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products, blood pressure monitors, medical supplies, and professional healthcare solutions.',
   keywords: [
-    "medical equipment Ethiopia",
-    "healthcare supplies Somaliland", 
-    "blood pressure monitors",
-    "medical devices",
-    "healthcare products",
-    "medical supplies Ethiopia",
-    "healthcare equipment",
-    "Ilkka Healthcare",
-    "medical technology",
-    "diagnostic equipment",
-    "patient monitoring",
-    "healthcare solutions"
+    'medical equipment Ethiopia',
+    'healthcare supplies Somaliland',
+    'blood pressure monitors',
+    'medical devices',
+    'healthcare products',
+    'medical supplies Ethiopia',
+    'healthcare equipment',
+    'Ilkka Healthcare',
+    'medical technology',
+    'diagnostic equipment',
+    'patient monitoring',
+    'healthcare solutions',
   ],
-  authors: [{ name: "Ilkka Healthcare" }],
-  creator: "Ilkka Healthcare",
-  publisher: "Ilkka Healthcare",
+  authors: [{ name: 'Ilkka Healthcare' }],
+  creator: 'Ilkka Healthcare',
+  publisher: 'Ilkka Healthcare',
   robots: {
     index: true,
     follow: true,
@@ -48,37 +50,39 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: "https://ilkka-healthcare.com",
-    siteName: "Ilkka Healthcare",
-    title: "Ilkka Healthcare - Medical Equipment & Supplies",
-    description: "Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products and professional solutions.",
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://ilkka-healthcare.com',
+    siteName: 'Ilkka Healthcare',
+    title: 'Ilkka Healthcare - Medical Equipment & Supplies',
+    description:
+      'Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products and professional solutions.',
     images: [
       {
-        url: "/logo.png",
+        url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: "Ilkka Healthcare Logo",
+        alt: 'Ilkka Healthcare Logo',
       },
     ],
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Ilkka Healthcare - Medical Equipment & Supplies",
-    description: "Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products and professional solutions.",
-    images: ["/logo.png"],
-    creator: "@ilkkahealthcare",
+    card: 'summary_large_image',
+    title: 'Ilkka Healthcare - Medical Equipment & Supplies',
+    description:
+      'Leading medical equipment supplier in Ethiopia and Somaliland. Quality healthcare products and professional solutions.',
+    images: ['/logo.png'],
+    creator: '@ilkkahealthcare',
   },
   verification: {
-    google: "your-google-verification-code", // Replace with actual verification code
-    yandex: "your-yandex-verification-code", // Replace with actual verification code
-    yahoo: "your-yahoo-verification-code", // Replace with actual verification code
+    google: 'your-google-verification-code', // Replace with actual verification code
+    yandex: 'your-yandex-verification-code', // Replace with actual verification code
+    yahoo: 'your-yahoo-verification-code', // Replace with actual verification code
   },
   alternates: {
-    canonical: "https://ilkka-healthcare.com",
+    canonical: 'https://ilkka-healthcare.com',
   },
-  category: "Healthcare",
+  category: 'Healthcare',
 };
 
 export default function RootLayout({
@@ -90,30 +94,32 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Ilkka Healthcare',
-    description: 'Leading medical equipment supplier in Ethiopia and Somaliland',
+    description:
+      'Leading medical equipment supplier in Ethiopia and Somaliland',
     url: 'https://ilkka-healthcare.com',
     logo: 'https://ilkka-healthcare.com/logo.png',
     contactPoint: {
       '@type': 'ContactPoint',
       telephone: '+251-xxx-xxxx', // Replace with actual phone
       contactType: 'Customer Service',
-      availableLanguage: ['English', 'Amharic', 'Somali']
+      availableLanguage: ['English', 'Amharic', 'Somali'],
     },
     address: {
       '@type': 'PostalAddress',
       addressCountry: 'Ethiopia',
-      addressRegion: 'Addis Ababa'
+      addressRegion: 'Addis Ababa',
     },
     sameAs: [
       'https://facebook.com/ilkkahealthcare',
       'https://twitter.com/ilkkahealthcare',
-      'https://linkedin.com/company/ilkkahealthcare'
+      'https://linkedin.com/company/ilkkahealthcare',
     ],
     potentialAction: {
       '@type': 'SearchAction',
-      target: 'https://ilkka-healthcare.com/products?search={search_term_string}',
-      'query-input': 'required name=search_term_string'
-    }
+      target:
+        'https://ilkka-healthcare.com/products?search={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
   };
 
   return (

@@ -35,7 +35,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
         onClose();
       }
     },
-    [onClose],
+    [onClose]
   );
 
   useEffect(() => {
@@ -62,35 +62,45 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
     >
       <div
         ref={modalRef}
-        className="relative flex h-[90vh] w-full max-w-5xl animate-in zoom-in-95 duration-300 rounded-3xl bg-card shadow-2xl transition-all"
+        className="animate-in zoom-in-95 bg-card relative flex h-[90vh] w-full max-w-5xl rounded-3xl shadow-2xl transition-all duration-300"
         onClick={(e) => e.stopPropagation()}
         tabIndex={-1}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute right-6 top-6 z-20 rounded-full bg-background/80 p-2 text-foreground shadow-lg transition-all duration-200 hover:bg-background"
+          className="bg-background/80 text-foreground hover:bg-background absolute top-6 right-6 z-20 rounded-full p-2 shadow-lg transition-all duration-200"
           aria-label="Close modal"
         >
-          <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          <svg
+            className="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
           </svg>
         </button>
 
-        <div className="flex flex-col lg:flex-row h-full w-full overflow-hidden">
+        <div className="flex h-full w-full flex-col overflow-hidden lg:flex-row">
           {/* Image Section */}
-          <div className="relative flex min-h-[300px] items-center justify-center rounded-t-3xl bg-muted/30 p-6 lg:w-1/2 lg:min-h-full lg:rounded-l-3xl lg:rounded-t-none">
-            <div className="relative h-full w-full max-h-96">
-              <Image 
-                src={product.image} 
-                alt={product.name} 
-                fill 
+          <div className="bg-muted/30 relative flex min-h-[300px] items-center justify-center rounded-t-3xl p-6 lg:min-h-full lg:w-1/2 lg:rounded-t-none lg:rounded-l-3xl">
+            <div className="relative h-full max-h-96 w-full">
+              <Image
+                src={product.image}
+                alt={product.name}
+                fill
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, 50vw"
                 priority
               />
             </div>
-            <div className="absolute left-6 top-6 rounded-full bg-primary px-4 py-1 text-sm font-medium text-primary-foreground">
+            <div className="bg-primary text-primary-foreground absolute top-6 left-6 rounded-full px-4 py-1 text-sm font-medium">
               {product.category}
             </div>
           </div>
@@ -100,40 +110,58 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
             <div className="space-y-8">
               {/* Header */}
               <div>
-                <h2 id="product-modal-title" className="text-4xl font-bold text-foreground">
+                <h2
+                  id="product-modal-title"
+                  className="text-foreground text-4xl font-bold"
+                >
                   {product.name}
                 </h2>
-                <p className="mt-2 text-2xl font-semibold text-primary">{product.price}</p>
-                <p className="mt-4 text-muted-foreground leading-relaxed">{product.description}</p>
+                <p className="text-primary mt-2 text-2xl font-semibold">
+                  {product.price}
+                </p>
+                <p className="text-muted-foreground mt-4 leading-relaxed">
+                  {product.description}
+                </p>
               </div>
 
               {/* Features */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 {product.features.map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <svg className="h-5 w-5 flex-shrink-0 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                    <svg
+                      className="text-primary h-5 w-5 flex-shrink-0"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
                       <path
                         fillRule="evenodd"
                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="text-base text-foreground">{feature}</span>
+                    <span className="text-foreground text-base">{feature}</span>
                   </div>
                 ))}
               </div>
 
               {/* Specifications */}
               <div>
-                <h3 className="mb-4 text-xl font-semibold text-foreground">Specifications</h3>
-                <div className="rounded-xl bg-secondary/50 p-6">
+                <h3 className="text-foreground mb-4 text-xl font-semibold">
+                  Specifications
+                </h3>
+                <div className="bg-secondary/50 rounded-xl p-6">
                   <dl className="space-y-4">
                     {Object.entries(product.specifications)
                       .filter(([, value]) => value !== undefined)
                       .map(([key, value]) => (
-                        <div key={key} className="flex justify-between items-center border-b border-border/30 pb-2 last:border-b-0 last:pb-0">
-                          <dt className="text-sm font-medium text-muted-foreground">{key}</dt>
-                          <dd className="text-sm text-foreground">{value}</dd>
+                        <div
+                          key={key}
+                          className="border-border/30 flex items-center justify-between border-b pb-2 last:border-b-0 last:pb-0"
+                        >
+                          <dt className="text-muted-foreground text-sm font-medium">
+                            {key}
+                          </dt>
+                          <dd className="text-foreground text-sm">{value}</dd>
                         </div>
                       ))}
                   </dl>
@@ -142,17 +170,21 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, onClose }) => {
 
               {/* Details */}
               <div>
-                <h3 className="mb-4 text-xl font-semibold text-foreground">Product Details</h3>
-                <p className="text-muted-foreground leading-relaxed">{product.details}</p>
+                <h3 className="text-foreground mb-4 text-xl font-semibold">
+                  Product Details
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {product.details}
+                </p>
               </div>
             </div>
 
             {/* Action Buttons */}
-            <div className="sticky bottom-0 mt-8 flex flex-col gap-4 bg-card pt-6 sm:flex-row">
-              <button className="flex-1 rounded-full bg-primary px-6 py-3 font-medium text-primary-foreground shadow-md transition-all duration-300 hover:scale-105 hover:bg-primary/90">
+            <div className="bg-card sticky bottom-0 mt-8 flex flex-col gap-4 pt-6 sm:flex-row">
+              <button className="bg-primary text-primary-foreground hover:bg-primary/90 flex-1 rounded-full px-6 py-3 font-medium shadow-md transition-all duration-300 hover:scale-105">
                 Add to Cart
               </button>
-              <button className="flex-1 rounded-full border border-secondary bg-secondary px-6 py-3 font-medium text-secondary-foreground transition-all duration-300 hover:bg-secondary/80">
+              <button className="border-secondary bg-secondary text-secondary-foreground hover:bg-secondary/80 flex-1 rounded-full border px-6 py-3 font-medium transition-all duration-300">
                 Contact Sales
               </button>
             </div>

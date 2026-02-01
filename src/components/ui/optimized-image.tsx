@@ -15,17 +15,17 @@ interface OptimizedImageProps {
   loading?: 'lazy' | 'eager';
 }
 
-export const OptimizedImage = ({ 
-  src, 
-  alt, 
-  fill, 
-  width, 
-  height, 
-  className = '', 
+export const OptimizedImage = ({
+  src,
+  alt,
+  fill,
+  width,
+  height,
+  className = '',
   sizes,
   priority = false,
   loading = 'lazy',
-  ...props 
+  ...props
 }: OptimizedImageProps) => {
   const [imgSrc, setImgSrc] = useState(src);
   const [isLoading, setIsLoading] = useState(true);
@@ -47,8 +47,10 @@ export const OptimizedImage = ({
 
   if (hasError) {
     return (
-      <div className={`bg-gray-200 flex items-center justify-center ${className}`}>
-        <span className="text-gray-500 text-sm">Image not available</span>
+      <div
+        className={`flex items-center justify-center bg-gray-200 ${className}`}
+      >
+        <span className="text-sm text-gray-500">Image not available</span>
       </div>
     );
   }
@@ -56,7 +58,7 @@ export const OptimizedImage = ({
   return (
     <>
       {isLoading && (
-        <div className={`bg-gray-200 animate-pulse ${className}`} />
+        <div className={`animate-pulse bg-gray-200 ${className}`} />
       )}
       <Image
         src={imgSrc}
