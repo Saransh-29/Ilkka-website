@@ -1,6 +1,7 @@
 import Navbar from '@/components/navbar';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
+import { LenisProvider } from '@/providers/lenis-provider';
 import './globals.css';
 
 const geistSans = Geist({
@@ -144,8 +145,16 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        {children}
+        <LenisProvider
+          options={{
+            duration: 1.2,
+            smooth: true,
+            smoothTouch: false,
+          }}
+        >
+          <Navbar />
+          {children}
+        </LenisProvider>
       </body>
     </html>
   );
