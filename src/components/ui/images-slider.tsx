@@ -89,32 +89,32 @@ export const ImagesSlider = ({
 
   const slideVariants: Variants = { // Explicitly type slideVariants as Variants
     initial: {
-      scale: 0,
+      x: direction === "left" ? "100%" : "-100%", // Slide in from right or left
       opacity: 0,
-      rotateY: 45, // Changed from rotateX to rotateY for horizontal perspective
     },
     visible: {
-      scale: 1,
-      rotateY: 0, // Changed from rotateX to rotateY
+      x: "0%",
       opacity: 1,
       transition: {
-        duration: 0.5,
+        duration: 0.8,
         // Cast the ease array to the expected tuple type for Framer Motion
         ease: [0.645, 0.045, 0.355, 1.0] as [number, number, number, number],
       },
     },
     leftExit: {
-      opacity: 1,
-      x: "-150%", // Changed from y to x for horizontal movement
+      x: "-100%", // Slide out to the left
+      opacity: 0,
       transition: {
-        duration: 1,
+        duration: 0.8,
+        ease: [0.645, 0.045, 0.355, 1.0] as [number, number, number, number],
       },
     },
     rightExit: {
-      opacity: 1,
-      x: "150%", // Changed from y to x for horizontal movement
+      x: "100%", // Slide out to the right
+      opacity: 0,
       transition: {
-        duration: 1,
+        duration: 0.8,
+        ease: [0.645, 0.045, 0.355, 1.0] as [number, number, number, number],
       },
     },
   };
