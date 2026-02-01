@@ -6,8 +6,8 @@ export const aboutContent: AboutContent = {
   image: {
     src: '/team.png',
     alt: 'ILKKA Healthcare professional team members working together',
-    width: 500,
-    height: 300,
+    width: 350,
+    height: 150,
     className: 'rounded-lg shadow-lg',
   },
   paragraphs: [
